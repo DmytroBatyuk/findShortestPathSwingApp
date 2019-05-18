@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_graphfindshortestpath" default="compile.module.graphfindshortestpath">
+  <dirname property="module.graphfindshortestpath.basedir" file="${ant.file.module_graphfindshortestpath}"/>
+  
+  <property name="module.jdk.home.graphfindshortestpath" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.graphfindshortestpath" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.graphfindshortestpath" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.graphfindshortestpath" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="graphfindshortestpath.output.dir" value="${module.graphfindshortestpath.basedir}/out/production/GraphFindShortestPath"/>
+  <property name="graphfindshortestpath.testoutput.dir" value="${module.graphfindshortestpath.basedir}/out/test/GraphFindShortestPath"/>
+  
+  <path id="graphfindshortestpath.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="graphfindshortestpath.module.production.classpath">
+    <path refid="${module.jdk.classpath.graphfindshortestpath}"/>
+    <path refid="library.kotlinjavaruntime_(2).classpath"/>
+    <path refid="library.org.jgrapht:jgrapht-core:1.3.0.classpath"/>
+  </path>
+  
+  <path id="graphfindshortestpath.runtime.production.module.classpath">
+    <pathelement location="${graphfindshortestpath.output.dir}"/>
+    <path refid="library.kotlinjavaruntime_(2).classpath"/>
+    <path refid="library.org.jgrapht:jgrapht-core:1.3.0.classpath"/>
+  </path>
+  
+  <path id="graphfindshortestpath.module.classpath">
+    <path refid="${module.jdk.classpath.graphfindshortestpath}"/>
+    <pathelement location="${graphfindshortestpath.output.dir}"/>
+    <path refid="library.kotlinjavaruntime_(2).classpath"/>
+    <path refid="library.org.jgrapht:jgrapht-core:1.3.0.classpath"/>
+  </path>
+  
+  <path id="graphfindshortestpath.runtime.module.classpath">
+    <pathelement location="${graphfindshortestpath.testoutput.dir}"/>
+    <pathelement location="${graphfindshortestpath.output.dir}"/>
+    <path refid="library.kotlinjavaruntime_(2).classpath"/>
+    <path refid="library.org.jgrapht:jgrapht-core:1.3.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.graphfindshortestpath">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.graphfindshortestpath">
+    <patternset refid="excluded.from.module.graphfindshortestpath"/>
+  </patternset>
+  
+  <path id="graphfindshortestpath.module.sourcepath">
+    <dirset dir="${module.graphfindshortestpath.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.graphfindshortestpath" depends="compile.module.graphfindshortestpath.production,compile.module.graphfindshortestpath.tests" description="Compile module GraphFindShortestPath"/>
+  
+  <target name="compile.module.graphfindshortestpath.production" depends="register.custom.compilers" description="Compile module GraphFindShortestPath; production classes">
+    <mkdir dir="${graphfindshortestpath.output.dir}"/>
+    <javac2 destdir="${graphfindshortestpath.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.graphfindshortestpath}/javac">
+      <compilerarg line="${compiler.args.graphfindshortestpath}"/>
+      <bootclasspath refid="graphfindshortestpath.module.bootclasspath"/>
+      <classpath refid="graphfindshortestpath.module.production.classpath"/>
+      <src refid="graphfindshortestpath.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.graphfindshortestpath"/>
+    </javac2>
+    
+    <copy todir="${graphfindshortestpath.output.dir}">
+      <fileset dir="${module.graphfindshortestpath.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.graphfindshortestpath.tests" depends="register.custom.compilers,compile.module.graphfindshortestpath.production" description="compile module GraphFindShortestPath; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.graphfindshortestpath" description="cleanup module">
+    <delete dir="${graphfindshortestpath.output.dir}"/>
+    <delete dir="${graphfindshortestpath.testoutput.dir}"/>
+  </target>
+</project>
