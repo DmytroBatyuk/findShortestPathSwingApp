@@ -1,6 +1,7 @@
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 
-public class DefaultOpenVertexEdge extends DefaultEdge {
+public class DefaultOpenWeightedEdge extends DefaultWeightedEdge {
     @Override
     public Object getSource() {
         return super.getSource();
