@@ -13,7 +13,7 @@ public class App {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("App");
+            JFrame frame = new JFrame("Розробив: ст. групи РІ-151, Крень К. Б.");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             CustomPanel customPanel = CustomPanel.createCustomPanel();
